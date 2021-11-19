@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Hash;
 use App\Models\User;
 use App\Models\LogPasswordUser;
+use App\Models\Ewallet;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 use Auth;
@@ -83,6 +84,12 @@ class AuthController extends Controller
                     'user_id' => $user->id,
                     'previous_password' => Hash::make($request->password),
                 ]);
+
+                //inset into balance user
+                Ewallet::create([
+                    'user_id'   => $user->id,
+                ]);
+                
                 $status = "success";
                 $message = "register successfully";
                 $code = 200;

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateLogPasswordUsersTable extends Migration
+class CreateBankAccountTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,12 @@ class CreateLogPasswordUsersTable extends Migration
      */
     public function up()
     {
-        Schema::create('log_password_user', function (Blueprint $table) {
+        Schema::create('bank_account', function (Blueprint $table) {
             $table->id();
             $table->integer('user_id');
-            $table->string('previous_password');
+            $table->string('account_holder_name');
+            $table->string('account_number');
+            $table->string('account_bank_name');
             $table->timestamps();
         });
     }
@@ -28,6 +30,6 @@ class CreateLogPasswordUsersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('log_password_users');
+        Schema::dropIfExists('account');
     }
 }

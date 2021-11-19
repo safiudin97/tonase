@@ -5,11 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class LogPasswordUser extends Model
+class BankAccount extends Model
 {
     use HasFactory;
 
-    protected $table = 'log_password_user';
+    protected $table = 'bank_account';
 
     protected $guarded = [];
 }

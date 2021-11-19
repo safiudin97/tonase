@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateLogPasswordUsersTable extends Migration
+class AddFromUserToEwalletTransactionTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,8 @@ class CreateLogPasswordUsersTable extends Migration
      */
     public function up()
     {
-        Schema::create('log_password_user', function (Blueprint $table) {
-            $table->id();
-            $table->integer('user_id');
-            $table->string('previous_password');
-            $table->timestamps();
+        Schema::table('ewallet_transaction', function (Blueprint $table) {
+            $table->integer('from_user')->nullable();
         });
     }
 
@@ -28,6 +25,8 @@ class CreateLogPasswordUsersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('log_password_users');
+        Schema::table('user_to_ewallet_transaction', function (Blueprint $table) {
+            //
+        });
     }
 }
