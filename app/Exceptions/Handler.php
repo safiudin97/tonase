@@ -59,16 +59,13 @@ class Handler extends ExceptionHandler
         if ($exception instanceof ModelNotFoundException) {
             $message = 'Resource is not found';
             $status_code = 404;
-        }
-        elseif ($exception instanceof NotFoundHttpException) {
+        }elseif ($exception instanceof NotFoundHttpException) {
             $message = 'Endpoint is not found';
             $status_code = 404;
-        }
-        elseif ($exception instanceof MethodNotAllowedHttpException) {
+        }elseif ($exception instanceof MethodNotAllowedHttpException) {
             $message = 'Method is not allowed';
             $status_code = 405;
-        }
-        else if ($exception instanceof ValidationException) {
+        }elseif ($exception instanceof ValidationException) {
             $validationErrors = $exception->validator->errors()->getMessages();
             $validationErrors = array_map(function($error) {
                 return array_map(function($message) {
@@ -77,12 +74,14 @@ class Handler extends ExceptionHandler
             }, $validationErrors);
             $message = $validationErrors;
             $status_code = 405;
-        }
-        else if ($exception instanceof QueryException) {
-            if ($debug) {
-                $message = $exception->getMessage();
-            } else {
-                $message = 'Query failed to execute';
+        }else if ($exception instanceof QueryException) {
+            $code_error = $exception->errorInfo[1];
+            if ($code_error == 1364) {
+                $message = 'Duplicate Entry';
+            }elseif($code_error == 1062){
+                $message = 'Some fields are required';
+            }else {
+                $message = 'Query failed to excecution';
             }
             $status_code = 500;
         }
