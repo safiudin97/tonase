@@ -22,5 +22,13 @@ Route::prefix('v1')->group(function () {
     Route::middleware(['auth:api'])->group(function () {
         Route::post('logout', [App\Http\Controllers\Api\AuthController::class, 'logout']);
         Route::post('reset_password', [App\Http\Controllers\Api\AuthController::class, 'resetPassword']);
+
+        //e wallet
+        Route::post('add_bank_account', [App\Http\Controllers\Api\EwalletController::class, 'addbankAccount']);
+        Route::post('topup', [App\Http\Controllers\Api\EwalletController::class, 'topup']);
+        Route::post('withdraw', [App\Http\Controllers\Api\EwalletController::class, 'withdraw']);
+        Route::post('transfer', [App\Http\Controllers\Api\EwalletController::class, 'transfer']);
+        Route::get('mutasi', [App\Http\Controllers\Api\EwalletController::class, 'mutasi']);
+
     }); 
 });
