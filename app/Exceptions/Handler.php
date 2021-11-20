@@ -78,12 +78,14 @@ class Handler extends ExceptionHandler
             $code_error = $exception->errorInfo[1];
             if ($code_error == 1364) {
                 $message = 'Duplicate Entry';
+                $status_code = 403;
             }elseif($code_error == 1062){
                 $message = 'Some fields are required';
+                $status_code = 422;
             }else {
                 $message = 'Query failed to excecution';
+                $status_code = 500;
             }
-            $status_code = 500;
         }
         $rendered = parent::render($request, $exception);
         $status_code = $rendered->getStatusCode();

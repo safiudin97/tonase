@@ -30,5 +30,13 @@ Route::prefix('v1')->group(function () {
         Route::post('transfer', [App\Http\Controllers\Api\EwalletController::class, 'transfer']);
         Route::get('mutasi', [App\Http\Controllers\Api\EwalletController::class, 'mutasi']);
 
+        //one bill
+        Route::post('create_invoice', [App\Http\Controllers\Api\InvoiceController::class, 'create']);
+        Route::get('list_invoice', [App\Http\Controllers\Api\InvoiceController::class, 'list']);
+        Route::post('create_billing_id', [App\Http\Controllers\Api\OneBillController::class, 'create']);
+        Route::post('payment_one_billing', [App\Http\Controllers\Api\OneBillController::class, 'payment']);
+
+
+
     }); 
 });
