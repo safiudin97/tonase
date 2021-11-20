@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateEwalletTransactionTable extends Migration
+class CreateInvoiceTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,15 @@ class CreateEwalletTransactionTable extends Migration
      */
     public function up()
     {
-        Schema::create('ewallet_transaction', function (Blueprint $table) {
+        Schema::create('invoice', function (Blueprint $table) {
             $table->id();
             $table->integer('user_id');
+            $table->string('invoice_no')->unique();
             $table->string('amount');
-            $table->enum('type_of_transaction', ['topup','withdraw','transfer','one_billing']);
-            $table->date('date_of_transaction');
-            $table->time('time_of_transaction');
-            $table->string('last_balance');
-            $table->integer('target_user')->nullable();
-            $table->integer('bank_account_id')->nullable();
+            $table->text('description');
+            $table->date('date_of_invoice');
+            $table->time('time_of_invoice');
+            $table->enum('is_payment', ['n', 'y'])->default('n');
             $table->integer('billing_id')->nullable();
             $table->timestamps();
         });
@@ -35,6 +34,6 @@ class CreateEwalletTransactionTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('ewallet_transaction');
+        Schema::dropIfExists('invoice');
     }
 }
